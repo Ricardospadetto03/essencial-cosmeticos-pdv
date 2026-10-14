@@ -1,0 +1,30 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente (o modelo fica em backend/.env.example)
+.env
+.env.*
+!.env.example
+
+# Banco de dados e backups locais (dados reais não vão para o repositório)
+backend/database/
+backend/backups/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Builds
+dist/
+release/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / sistema
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db

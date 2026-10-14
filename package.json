@@ -1,0 +1,59 @@
+{
+  "name": "essencial-cosmeticos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema de PDV e controle de estoque para loja de cosméticos (React + Node.js + SQLite + Electron)",
+  "main": "electron/main.js",
+  "scripts": {
+    "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "test": "npm --prefix backend test",
+    "lint": "npm --prefix backend run lint && npm --prefix frontend run lint",
+    "electron:dev": "electron .",
+    "electron:prod-preview": "cross-env ELECTRON_RUN_MODE=prod electron .",
+    "build:frontend:electron": "cd frontend && cross-env VITE_API_URL=http://127.0.0.1:3000 npm run build",
+    "dist": "npm run build:frontend:electron && electron-builder --win"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^42.8.1",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.essencialcosmeticos.pdv",
+    "productName": "Essencial Cosméticos",
+    "npmRebuild": false,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "backend/package.json",
+      "backend/src/**/*",
+      "backend/node_modules/**/*",
+      "!backend/node_modules/nodemon/**",
+      "!backend/database/**",
+      "!backend/backups/**",
+      "!backend/.env",
+      "frontend/dist/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "backend/node_modules/bcrypt/**/*",
+      "backend/node_modules/sqlite3/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "frontend/public/logo-essencial.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Essencial Cosméticos"
+    }
+  }
+}
